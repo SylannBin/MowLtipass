@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MowLtipass.Core
 {
-    class Manche
+    public class Manche
     {
     }
 }

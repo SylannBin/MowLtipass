@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MowLtipass.Core
 {
-    class Bot
+    public class Bot
     {
     }
 }

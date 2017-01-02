@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MowLtipass.Core
 {
-    class Stats
+    public class Stats
     {
         public int MaxCartesRamassees { get; set; }
         public int MaxCartesTroupeau { get; set; }

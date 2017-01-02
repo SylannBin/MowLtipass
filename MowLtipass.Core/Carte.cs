@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MowLtipass.Core
 {
-    class Carte
+    public class Carte
     {
         /// <summary>
         /// Indique le numéro de la carte, c'est à dire son identité principale.
