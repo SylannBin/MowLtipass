@@ -8,5 +8,8 @@ namespace MowLtipass.Core
 {
     public class Bot
     {
+        // TODO: implémenter l'intelligence artificielle
+        // La particularité du Bot, C'est que ses choix sont décidés automatiquement à son tour uniquement
+        // Il faut appeler les méthodes suivant une logique de jeu
     }
 }

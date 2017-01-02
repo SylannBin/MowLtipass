@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace MowLtipass.Core
 {
+    /// <summary>
+    /// Propriétés à utiliser pour faire de la statistique
+    /// En bonus uniquement
+    /// </summary>
     public class Stats
     {
         public int MaxCartesRamassees { get; set; }

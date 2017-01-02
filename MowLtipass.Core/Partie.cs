@@ -8,5 +8,6 @@ namespace MowLtipass.Core
 {
     public class Partie
     {
+
     }
 }
