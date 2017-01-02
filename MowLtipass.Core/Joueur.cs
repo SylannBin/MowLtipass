@@ -48,6 +48,8 @@ namespace MowLtipass.Core
 
         /// <summary>
         /// TODO piocher
+        /// Prendre la dernière carte de la pioche (il faut que la carte soit enlevée de la stack)
+        /// Ajoute cette carte à la main du joueur
         /// </summary>
         public void Piocher()
         {
@@ -57,6 +59,8 @@ namespace MowLtipass.Core
 
         /// <summary>
         /// TODO jouer carte
+        /// Enlève la carte en paramêtre de la main du joueur, et la place dans le troupeau.
+        /// SSI c'est possible (vérifier que l'emplacement est libre)
         /// </summary>
         /// <param name="carteJouee"></param>
         public void Jouer(Carte carteJouee)
@@ -67,8 +71,21 @@ namespace MowLtipass.Core
 
         /// <summary>
         /// TODO ramasser troupeau
+        /// Enlève les cartes présentes dans Troupeau, les ajoute à l'étable du joueur.
+        /// Exécute MAJScore() (compte les mouches et ajoute le résultat au score
+        /// Renvoie le nombre de mouches récupérées lors du ramassage.
         /// </summary>
         public void Ramasser()
+        {
+
+        }
+
+
+        /// <summary>
+        /// TODO Compter le score
+        /// Compter les mouches dans l'étable et attribuer le résultat au score du joueur
+        /// </summary>
+        public void MAJScore()
         {
 
         }
