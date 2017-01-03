@@ -224,11 +224,11 @@ namespace MowLtipass.Core
         /// A l'inverse, si aucune carte ne correspond, renvoie true.
         /// La valeur n'a rien à voir avec l'emplacement dans le tableau !
         /// </summary>
-        public bool PlaceLibre(int Valeur)
+        public bool Jouable(Carte carteJoueur)
         {
-            foreach (Carte carte in Troupeau)
+            foreach (Carte cartePlacee in Troupeau)
             {
-                if (carte.Numero == Valeur)
+                if (cartePlacee == carteJoueur)
                 {
                     return false;
                 }

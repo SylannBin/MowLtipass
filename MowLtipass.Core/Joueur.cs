@@ -57,14 +57,17 @@ namespace MowLtipass.Core
 
 
         /// <summary>
-        /// TODO jouer carte
         /// Enlève la carte en paramêtre de la main du joueur, et la place dans le troupeau.
         /// SSI c'est possible (vérifier que l'emplacement est libre)
         /// </summary>
         /// <param name="carteJouee"></param>
-        public void Jouer(Carte carteJouee)
+        public void Jouer(Manche manche, Carte carteJouee)
         {
-
+            if(manche.Jouable(carteJouee) == true)
+            {
+                manche.Troupeau.Add(carteJouee);
+                MainDuJoueur.Remove(carteJouee);
+            }
         }
 
 
