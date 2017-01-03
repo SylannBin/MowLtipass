@@ -10,6 +10,8 @@ namespace MowLtipass.Core
     {
         /* Propriétés */
 
+        public SensDeJeu sens { get; set; } = SensDeJeu.Horaire;   
+
         /// <summary>
         /// Liste des cartes existantes dans le jeu
         /// </summary>

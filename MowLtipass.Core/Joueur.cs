@@ -24,12 +24,12 @@ namespace MowLtipass.Core
         /// 1 - ajouté les cartes de la main (MainDuJoueur.Retirer -> Etable.Ajouter) (pour chaque carte de MainDuJoueur)
         /// 2 - compté le nombre de mouche (Etable.CompterMouches)
         /// </summary>
-        public Stack<Carte> Etable { get; set; }
+        public List<Carte> Etable { get; set; }
 
         /// <summary>
         /// Score total du joueur au cours d'une partie (init à 0). Ajoute le total nb_mouche à chaque fin de tour
         /// </summary>
-        public int score { get; set; }
+        public int score { get; set; } = 0;
 
         /// <summary>
         /// Identifiant unique du joueur (numéro de 0 à 4)
@@ -51,9 +51,9 @@ namespace MowLtipass.Core
         /// Prendre la dernière carte de la pioche (il faut que la carte soit enlevée de la stack)
         /// Ajoute cette carte à la main du joueur
         /// </summary>
-        public void Piocher()
+        public void Piocher(Manche manche)
         {
-
+            MainDuJoueur.Add(manche.Pioche.Pop());
         }
 
 
@@ -70,34 +70,36 @@ namespace MowLtipass.Core
 
 
         /// <summary>
-        /// TODO ramasser troupeau
         /// Enlève les cartes présentes dans Troupeau, les ajoute à l'étable du joueur.
-        /// Exécute MAJScore() (compte les mouches et ajoute le résultat au score
-        /// Renvoie le nombre de mouches récupérées lors du ramassage.
+        /// Exécute MAJScore() (compte les mouches et ajoute le résultat au score)
         /// </summary>
-        public void Ramasser()
+        public void Ramasser(Manche manche)
         {
-
+            Etable.AddRange(manche.Troupeau);
+            manche.Troupeau.Clear();
+            MAJScore();
         }
 
 
         /// <summary>
-        /// TODO Compter le score
         /// Compter les mouches dans l'étable et attribuer le résultat au score du joueur
         /// </summary>
-        public void MAJScore()
+        private void MAJScore()
         {
-
+            score = 0;
+            foreach(Carte carte in Etable)
+            {
+                score += carte.NbMouche;
+            }
         }
 
 
         /// <summary>
-        /// TODO changer sens de jeu
         /// Alterne le sens de jeu de la manche (Horaire -> AntoHoraire, AntoHoraire -> Horaire)
         /// </summary>
-        public void ChangerSensDeJeu()
+        public void ChangerSensDeJeu(Manche manche)
         {
-
+            manche.sens = (manche.sens == SensDeJeu.Horaire) ? SensDeJeu.AntiHoraire : SensDeJeu.Horaire;
         }
     }
 }
