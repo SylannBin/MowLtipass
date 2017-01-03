@@ -224,14 +224,36 @@ namespace MowLtipass.Core
         /// A l'inverse, si aucune carte ne correspond, renvoie true.
         /// La valeur n'a rien à voir avec l'emplacement dans le tableau !
         /// </summary>
-        public bool Jouable(Carte carteJoueur)
+        public bool TestJouabilite(Carte carteJoueur)
         {
+            int plusGrandNumero = 0;
+            int plusPetitNumero = 16;
+
+            if (Troupeau.Count() != 0 )
+            {
+                plusGrandNumero = 0;
+                plusPetitNumero = 16;
+            } else
+            {
+                return true;
+            }
+
             foreach (Carte cartePlacee in Troupeau)
             {
-                if (cartePlacee == carteJoueur)
+                if (cartePlacee.Numero == carteJoueur.Numero && carteJoueur.TypeDeCarte != TypesDeCarte.acrobate)
                 {
                     return false;
+                } else if(cartePlacee.Numero > plusGrandNumero)
+                {
+                    plusGrandNumero = cartePlacee.Numero;
+                } else if(cartePlacee.Numero < plusPetitNumero)
+                {
+                    plusPetitNumero = cartePlacee.Numero;
                 }
+            }
+            if(plusPetitNumero < carteJoueur.Numero && carteJoueur.Numero > plusGrandNumero)
+            {
+
             }
             return true;
         }
