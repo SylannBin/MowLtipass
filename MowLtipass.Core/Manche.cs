@@ -50,7 +50,7 @@ namespace MowLtipass.Core
         /// - 2 vaches acrobates
         /// - 2 vaches retardataires
         /// </summary>
-        private void listerLesCartes()
+        public void listerLesCartes()
         {
             listeDesCartes = new List<Carte>();
 
@@ -192,6 +192,9 @@ namespace MowLtipass.Core
             // Générateur de nombre aléatoire
             Random randomGenerator = new Random();
 
+            // revide la pioche au cas où
+            Pioche.Clear();
+
             // Jusqu'à ce que la pioche soit complète
             for (int i=0; i<48; i++)
             {
@@ -249,7 +252,7 @@ namespace MowLtipass.Core
         /// CONSTRUCTEUR
         /// Initialise le Troupeau, la pioche, le sens de jeu
         /// </summary>
-        Manche()
+        public Manche()
         {
             SensDeJeu SensDeJeu = SensDeJeu.Horaire;
             Troupeau = new ObservableCollection<Carte>();

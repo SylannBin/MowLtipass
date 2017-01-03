@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
 using System.IO.Packaging;
-using MowGame.Core;
+using MowLtipass.Core;
 using System.Security.Cryptography;
 
 namespace MowGame.Main
@@ -24,6 +24,13 @@ namespace MowGame.Main
     /// </summary>
     public partial class MainWindow : Window
     {
+        // La partie commence
+        Partie partie = new Partie();
+
+        // La manche commence
+        Manche manche = new Manche();
+
+
         public bool evenement = false;// Booléen qui va instencier si on peut cliqué sur les carte ou non
 
         public MainWindow()
@@ -32,6 +39,7 @@ namespace MowGame.Main
             int taille;
             int CardHeight = 110;
             int CardWidth = 60;
+
 
             // Test du binding sur la fenêtre principale (inutile, juste pour tester)
             this.DataContext = this;
@@ -72,19 +80,20 @@ namespace MowGame.Main
             JoueurCourantCarte4.Fill = new ImageBrush(new BitmapImage(uriSource4));
             JoueurCourantCarte5.Fill = new ImageBrush(new BitmapImage(uriSource5));
             // Origine Nathan
-
         }
+
+
+
+
+
 
         //test random, property from carte //
         private void image_click_up(object sender, RoutedEventArgs e)
         {
-            List<Vache> deck = new List<Vache>();
-            EnsembleCarte test = new EnsembleCarte();
-            Manche manche = new Manche();
-            deck = manche.createDeck();
-            int rng = test.GetRnd(0, deck.Count);
-            Vache carte = deck[rng];
-            DoraRdm.Text = carte.ImagePath;
+            // Vide la pioche, la remplie de nouveau avec la liste des cartes du jeu, et mélange les cartes
+            manche.MelangerPioche();
+
+            
             var uriSource6 = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "up.jpg"));
             // Origine Nathan
             imagerefresh.Source = new BitmapImage(uriSource6);
@@ -117,13 +126,16 @@ namespace MowGame.Main
 
         private void BtnRamasserClick(object sender, RoutedEventArgs e) // Rammase le troupeau et le remet à 0
         {
+
+
+
             // Supprimer le contenu du troupeau et ajouter à l'étable du joueur qui vient de ramasser
             // Doit faire appel à 2 méthodes:
             // se référer aux classes (et voir le diagramme UML)
             // exemple: imaginer que cette ligne a été écrite à sa place (création de la partie)
             Humain romain = new Humain();
             // j'appelle la méthode ramasser
-            romain.ramasser();
+            romain.Ramasser(manche);
 
             // Problème: cette fonction doit utiliser le bon joueur
 
@@ -137,9 +149,9 @@ namespace MowGame.Main
 
         }
         /*Image monImage = (Image)sender;
-            string chemin = (string)monImage.DataContext;
-            MessageBox.Show(chemin);
-            */
+        string chemin = (string)monImage.DataContext;
+        MessageBox.Show(chemin);
+        */
 
 
         public void BtnPoserCarte(object sender, MouseButtonEventArgs e) // Place la carte lorsqu'elle est cliqué
