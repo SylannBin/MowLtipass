@@ -47,7 +47,6 @@ namespace MowLtipass.Core
 
 
         /// <summary>
-        /// TODO piocher
         /// Prendre la dernière carte de la pioche (il faut que la carte soit enlevée de la stack)
         /// Ajoute cette carte à la main du joueur
         /// </summary>
