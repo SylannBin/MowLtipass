@@ -95,7 +95,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MowLtipass.Core\MowLtipass.Core.csproj">
+      <Project>{51bdba0e-5f3c-42a5-b3c1-2e053a346fd9}</Project>
+      <Name>MowLtipass.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\acrobate7.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
