@@ -266,24 +266,40 @@ namespace MowLtipass.Core
         /// Sinon, renvoie false
         /// </summary>
         /// <return>bool</return>
+        /// TODO : A relire juste pour voir si c'est cohérent niveau algo
+        /// WARNING : Ne refais pas tout si ça marche, Romain.
         public void PlacerCarte(Carte carteJoueur, out bool result)
         {
             if (EstJouable(carteJoueur))
             {
                 // retardataire : récupérer l'emplacement (le premier vide entre 2 cartes (intervalle 1)
-                // TODO : A relire juste pour voir si c'est cohérent niveau algo
-                // WARNING : Ne refais pas tout si ça marche, Romain.
-                if(carteJoueur.TypeDeCarte == TypesDeCarte.acrobate)
+                if (carteJoueur.TypeDeCarte == TypesDeCarte.retardataire)
                 {
-                   int index = Troupeau.IndexOf(Troupeau.Where(cartePlacee =>
-                        carteJoueur.TypeDeCarte == TypesDeCarte.retardataire &&
-                        Troupeau.ElementAt(Troupeau.IndexOf(cartePlacee) + 1).Numero == cartePlacee.Numero + 2)
-                        .First()) + 1;
+                    int index = Troupeau.IndexOf(Troupeau.Where(cartePlacee =>
+                         Troupeau.ElementAt(Troupeau.IndexOf(cartePlacee) + 1).Numero == cartePlacee.Numero + 2)
+                         .First()) + 1;
                     Troupeau.Insert(index, carteJoueur);
                 }
+
                 // acrobate : emplacement (carte placée de même numéro)
+                else if (carteJoueur.TypeDeCarte == TypesDeCarte.acrobate)
+                {
+                    int index = Troupeau.IndexOf(Troupeau.Where(cartePlacee => 
+                    (cartePlacee.Numero == carteJoueur.Numero))
+                    .First()) + 1;
+                    Troupeau.Insert(index, carteJoueur);
+                }
+
                 // le reste : si plus petite que First => first - 1
                 //            si plus grande que Last => Last + 1
+                else if (carteJoueur.Numero < Troupeau.First().Numero)
+                {
+                    Troupeau.Insert(0, carteJoueur);
+                }
+                else if (carteJoueur.Numero > Troupeau.Last().Numero)
+                {
+                    Troupeau.Add(carteJoueur);
+                }
                 result = true;
             }
             // si ce n'est pas jouable 
