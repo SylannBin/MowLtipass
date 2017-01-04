@@ -30,6 +30,8 @@ namespace MowGame.Main
         // La manche commence
         Manche manche = new Manche();
 
+        // Carte carteJoueur
+        Carte carteJoueur = new Carte();
 
         public bool evenement = false;// Booléen qui va instencier si on peut cliqué sur les carte ou non
 
@@ -39,6 +41,18 @@ namespace MowGame.Main
             int taille;
             int CardHeight = 110;
             int CardWidth = 60;
+
+            bool result;
+            // Exécute les tests de placement de la carte: place la carte si c'est possible
+            manche.PlacerCarte(carteJoueur, out result);
+            
+            // si le placement de la carte échoue
+            if (!result)
+            {
+                // j'envoie le message pour indiquer que la carte n'est pas jouable
+
+            }
+            
 
 
             // Test du binding sur la fenêtre principale (inutile, juste pour tester)

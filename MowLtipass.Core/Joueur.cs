@@ -63,7 +63,7 @@ namespace MowLtipass.Core
         /// <param name="carteJouee"></param>
         public void Jouer(Manche manche, Carte carteJouee)
         {
-            if(manche.TestJouabilite(carteJouee) == true)
+            if(manche.EstJouable(carteJouee) == true)
             {
                 manche.Troupeau.Add(carteJouee);
                 MainDuJoueur.Remove(carteJouee);

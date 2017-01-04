@@ -89,7 +89,7 @@
 
         <!-- DEBUT Liste des Cartes du joueur en cours (EN BAS) -->
 
-        <StackPanel Name="panel" Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" MouseEnter="hover" MouseLeave="finhover">
+        <StackPanel Name="panel" Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center" VerticalAlignment="Center" Height="120" MouseEnter="hover" MouseLeave="finhover">
 
             <Rectangle x:Name="JoueurCourantCarte1" Height="110" Width="60" Margin="20,5" Fill="FloralWhite"/>
             <Rectangle x:Name="JoueurCourantCarte2" Height="110" Width="60" Margin="20,5" Fill="FloralWhite" MouseLeftButtonDown="BtnPoserCarte"/>
@@ -105,20 +105,6 @@
             <Button x:Name="BtnRamasser"
                     Content="Ramasser le troupeau"
                     Click="BtnRamasserClick"
-                    Height="30"
-                    Width="140"
-                    Margin="10"/>
-
-            <Button x:Name="BtnJouerCarte"
-                    Content="Jouer une carte"
-                    Click="BtnJouerCarteClick"
-                    Height="30"
-                    Width="140"
-                    Margin="10"/>
-
-            <Button x:Name="BtnPiocherCarte"
-                    Content="Terminer le tour"
-                    Click="BtnPiocherCarteClick"
                     Height="30"
                     Width="140"
                     Margin="10"/>

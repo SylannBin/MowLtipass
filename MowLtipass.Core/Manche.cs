@@ -228,7 +228,7 @@ namespace MowLtipass.Core
         /// </summary>
         /// <param name="carteJoueur">La carte que l'on essaie de jouer</param>
         /// <returns>bool</returns>
-        public bool TestJouabilite(Carte carteJoueur)
+        public bool EstJouable(Carte carteJoueur)
         {
             // Ex Troupeau:      5 <> 7 <> 9 10 12 13
             // Parcourt chaque carte placée dans le troupeau
@@ -261,14 +261,30 @@ namespace MowLtipass.Core
 
 
         /// <summary>
-        /// TODO
+        /// Teste si la carte est jouable
+        /// Si oui, joue la carte (la met à l'emplacement correct) et renvoie true
+        /// Sinon, renvoie false
         /// </summary>
-        public void placerCarte()
+        /// <return>bool</return>
+        public void PlacerCarte(Carte carteJoueur, out bool result)
         {
-            // retardataire : récup
+            if (EstJouable(carteJoueur))
+            {
+                // retardataire : récupérer l'emplacement (le premier vide entre 2 cartes (intervalle 1)
+                // acrobate : emplacement (carte placée de même numéro)
+                // le reste : si plus petite que First => first - 1
+                //            si plus grande que Last => Last + 1
+                result = true;
+            }
+            // si ce n'est pas jouable 
+            else
+            {
+                result = false;
+
+            }
         }
 
-
+        
 
 
         /// <summary>
