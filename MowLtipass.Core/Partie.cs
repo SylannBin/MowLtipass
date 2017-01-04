@@ -8,6 +8,8 @@ namespace MowLtipass.Core
 {
     public class Partie
     {
+        // gros taff bien ouej
 
+        
     }
 }
