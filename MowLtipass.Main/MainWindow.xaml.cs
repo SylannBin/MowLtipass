@@ -10,120 +10,153 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Drawing;
-using System.IO.Packaging;
+using System.IO;
 using MowLtipass.Core;
-using System.Security.Cryptography;
 
 namespace MowGame.Main
 {
+
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        // La partie commence
+        // Chemin vers le dossier contenant les images
+        public string DossierImages = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
+
+        
+        // Indique si l'on peut cliquer sur les cartes ou non
+        public bool evenement = false;
+
         Partie partie = new Partie();
-
-        // La manche commence
         Manche manche = new Manche();
-
-        // Carte carteJoueur
         Carte carteJoueur = new Carte();
 
-        public bool evenement = false;// Booléen qui va instencier si on peut cliqué sur les carte ou non
+
+        Joueur J1 = new Joueur(id: 0, pseudo: "Romain", race: "Humain");
+        Joueur J2 = new Joueur(id: 1, pseudo: "Nathan", race: "Humain");
+        Joueur J3 = new Joueur(id: 2, pseudo: "R209", race: "Robot");
+
 
         public MainWindow()
         {
             InitializeComponent();
-            int taille;
-            int CardHeight = 110;
-            int CardWidth = 60;
 
-            bool result;
+            #region NATHAN Déroulement du jeu
+            /**
+             * Ajoute ici le déroulement du jeu,
+             * jusqu'à la balise #endregion
+             * 
+             * - fin de partie, de manche
+             * - début de partie, de manche -> variables à instancier, constructeurs à appeler
+             * - ...
+             */
+
+            // Exemple ci-dessous (vu ensemble hier)
+            //
+
+            bool cartePlacee;
             // Exécute les tests de placement de la carte: place la carte si c'est possible
-            manche.PlacerCarte(carteJoueur, out result);
+            manche.PlacerCarte(carteJoueur, out cartePlacee);
             
             // si le placement de la carte échoue
-            if (!result)
+            if (!cartePlacee)
             {
                 // j'envoie le message pour indiquer que la carte n'est pas jouable
 
             }
-            
 
 
-            // Test du binding sur la fenêtre principale (inutile, juste pour tester)
-            this.DataContext = this;
+            #endregion
 
-            // Déclaration path Cartes spéciales
+            #region Chargement des images (Exemple)
+
+            // Déclaration fichier source des Cartes spéciales
             // var srcBackGr = new Uri(@"/Images/GameBG.jpg", UriKind.Relative);
+            var srcSensDuJeu = new Uri(Path.Combine(DossierImages, "SensDuJeu.jpg"));
+            var srcRetardataire = new Uri(Path.Combine(DossierImages, "retardataire.jpg"));
+            var srcSerreFile0 = new Uri(Path.Combine(DossierImages, "serreFile0.jpg"));
+            var srcSerreFile16 = new Uri(Path.Combine(DossierImages, "serreFile16.jpg"));
+            var srcAcrobate7 = new Uri(Path.Combine(DossierImages, "acrobate7.jpg"));
+            var srcAcrobate9 = new Uri(Path.Combine(DossierImages, "acrobate9.jpg"));
 
-            var srcSensDuJeu = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "SensDuJeu.jpg"));
-            var srcRetardataire = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "retardataire.jpg"));
-            var srcSerreFile0 = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "serreFile0.jpg"));
-            var srcSerreFile16 = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "serreFile16.jpg"));
-            var srcAcrobate7 = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "acrobate7.jpg"));
-            var srcAcrobate9 = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "acrobate9.jpg"));
-
+            // Déclaration fichier source des Cartes présentes dans la main
+            var uriSource1 = new Uri(Path.Combine(DossierImages, "standard4_1.jpg"));
+            var uriSource2 = new Uri(Path.Combine(DossierImages, "acrobate9.jpg"));
+            var uriSource3 = new Uri(Path.Combine(DossierImages, "default.jpg"));
+            var uriSource4 = new Uri(Path.Combine(DossierImages, "default.jpg"));
+            var uriSource5 = new Uri(Path.Combine(DossierImages, "default.jpg"));
+            var uriSource6 = new Uri(Path.Combine(DossierImages, "up.jpg"));
 
             // Initialisation
             //Game.Background = new BitmapImage(srcBackGr);
 
+            // Instanciation des images spéciales
             Card0.Fill = new ImageBrush(new BitmapImage(srcSerreFile0));
             Card1.Fill = new ImageBrush(new BitmapImage(srcAcrobate7));
             Card2.Fill = new ImageBrush(new BitmapImage(srcAcrobate9));
             Card3.Fill = new ImageBrush(new BitmapImage(srcSerreFile16));
-
             SensDuJeu.Fill = new ImageBrush(new BitmapImage(srcSensDuJeu));
 
-
-            // Définition des images de la main
-            var uriSource1 = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "standard4_1.jpg"));
-            var uriSource2 = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "acrobate9.jpg"));
-            var uriSource3 = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "default.jpg"));
-            var uriSource4 = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "default.jpg"));
-            var uriSource5 = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "default.jpg"));
-            var uriSource6 = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "up.jpg"));
-
+            // Instanciation des images
             JoueurCourantCarte1.Fill = new ImageBrush(new BitmapImage(uriSource1));
             JoueurCourantCarte2.Fill = new ImageBrush(new BitmapImage(uriSource2));
             JoueurCourantCarte3.Fill = new ImageBrush(new BitmapImage(uriSource3));
             JoueurCourantCarte4.Fill = new ImageBrush(new BitmapImage(uriSource4));
             JoueurCourantCarte5.Fill = new ImageBrush(new BitmapImage(uriSource5));
-            // Origine Nathan
+
+            #endregion
+
+
         }
 
 
+        // Exemple datacontext conservé pour comparaison
+        /*Image monImage = (Image)sender;
+        string chemin = (string)monImage.DataContext;
+        MessageBox.Show(chemin);
+        */
 
 
 
-
-        //test random, property from carte //
+        /// <summary>
+        /// test random, property from carte
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void image_click_up(object sender, RoutedEventArgs e)
         {
             // Vide la pioche, la remplie de nouveau avec la liste des cartes du jeu, et mélange les cartes
             manche.MelangerPioche();
 
             
-            var uriSource6 = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "up.jpg"));
+            var uriSource6 = new Uri(Path.Combine(DossierImages, "up.jpg"));
             // Origine Nathan
             imagerefresh.Source = new BitmapImage(uriSource6);
             // Alternative Bouton refresh
             //imagerefresh.Fill = new ImageBrush( new BitmapImage(uriSource6) );
         }
 
+        /// <summary>
+        /// Origine Nathan
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void image_click_down(object sender, RoutedEventArgs e)
         {
-            var uriSource6 = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "refresh.jpg"));
-            // Origine Nathan
+            var uriSource6 = new Uri(Path.Combine(DossierImages, "refresh.jpg"));
             imagerefresh.Source = new BitmapImage(uriSource6);
-            // Alternative Bouton refresh
-            //imagerefresh.Fill = new ImageBrush( new BitmapImage(uriSource6) );
+            // imagerefresh.Fill = new ImageBrush( new BitmapImage(uriSource6) ); // alternative ci-dessus
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void image_enter(object sender, MouseEventArgs e)
         {
             Image img = ((Image)sender);
@@ -131,6 +164,11 @@ namespace MowGame.Main
             img.Width = 40;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void image_leave(object sender, MouseEventArgs e)
         {
             Image img = ((Image)sender);
@@ -138,36 +176,35 @@ namespace MowGame.Main
             img.Width = 33;
         }
 
-        private void BtnRamasserClick(object sender, RoutedEventArgs e) // Rammase le troupeau et le remet à 0
+        /// <summary>
+        /// Le joueur qui déclanche la méthode rammase le troupeau:
+        /// - ajoute les cartes à son étable, et recalcule son score
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnRamasserClick(object sender, RoutedEventArgs e)
         {
-
-
-
-            // Supprimer le contenu du troupeau et ajouter à l'étable du joueur qui vient de ramasser
-            // Doit faire appel à 2 méthodes:
-            // se référer aux classes (et voir le diagramme UML)
-            // exemple: imaginer que cette ligne a été écrite à sa place (création de la partie)
-            Humain romain = new Humain();
-            // j'appelle la méthode ramasser
-            romain.Ramasser(manche);
-
-            // Problème: cette fonction doit utiliser le bon joueur
-
-            MessageBox.Show("Vous avez rammassé le troupeau !");
+            // exemple:
+            J1.Ramasser(manche);
+            MessageBox.Show(J1.Pseudo + " a rammassé le troupeau !");
         }
 
         public void BtnJouerCarteClick(object sender, RoutedEventArgs e) // Rends les cartes cliquable et prévient l'utilisateur  
         {
-            evenement = true;
-            MessageBox.Show("Vous pouvez jouer une carte !");
+            // Il faut choisir une carte (ici, je met en dur, mais il faut la récupérer avec le clic souris)
+            Carte carte = new Carte();
+
+            // 
+            J1.Jouer(manche, carte);
+            MessageBox.Show(J1.Pseudo + " a joué la carte " + carte);
 
         }
-        /*Image monImage = (Image)sender;
-        string chemin = (string)monImage.DataContext;
-        MessageBox.Show(chemin);
-        */
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void BtnPoserCarte(object sender, MouseButtonEventArgs e) // Place la carte lorsqu'elle est cliqué
         {
             if (evenement)
@@ -186,7 +223,6 @@ namespace MowGame.Main
                 }
                 evenement = false;
             }
-
         }
 
 
@@ -200,6 +236,7 @@ namespace MowGame.Main
             // TODO: Ajouter un message dans l'historique dès que l'on commence à dragndrop
             //this.HistoriquePartie
         }
+
         // Lorsque le curseur entre dans la zone stackpanel, ça taille vertical augmente à 120
         private void hover(object sender, MouseEventArgs e)
         {
@@ -207,6 +244,7 @@ namespace MowGame.Main
             panel.Height = taille;
 
         }
+
         // Lorsque le curseur sort de la zone stackpanel, ça taille vertical revient à 25
         private void finhover(object sender, MouseEventArgs e)
         {
