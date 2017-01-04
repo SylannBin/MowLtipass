@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:MowLtipass.Main">
+    <SolidColorBrush x:Key="BtnText" Color="Aqua"/>
+    <SolidColorBrush x:Key="BtnBrush" Color="AliceBlue"/>
+    <SolidColorBrush x:Key="BtnBorder" Color="Aqua"/>
+    <SolidColorBrush x:Key="BtnActive" Color="Azure"/>
+    <SolidColorBrush x:Key="BtnPressed" Color="Aquamarine"/>
+    <SolidColorBrush x:Key="BtnDisabled" Color="LightBlue"/>
+    
+</ResourceDictionary>
