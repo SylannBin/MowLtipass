@@ -13,10 +13,10 @@
 
     <DockPanel>
 
-            <!-- DEBUT Liste des joueurs (EN HAUT) -->
-            <WrapPanel DockPanel.Dock="Top">
+        <!-- DEBUT Liste des joueurs (EN HAUT) -->
+        <WrapPanel DockPanel.Dock="Top">
 
-                <TextBlock x:Name="InfoDuJoueur1"
+            <TextBlock x:Name="InfoDuJoueur1"
                                Text="Main du Joueur 1 Cartes retournées Score : x mouches Etable : y vaches *En train de jouer"
                                Height="140"
                                Width="170"
@@ -30,7 +30,7 @@
                                FontSize="18"
                                Panel.ZIndex="10"/>
 
-                <TextBlock x:Name="InfoDuJoueur2"
+            <TextBlock x:Name="InfoDuJoueur2"
                                Text="Main du Joueur 2 Cartes retournées Score : x mouches Etable : y vaches En attente"
                                Height="140"
                                Width="170"
@@ -44,7 +44,7 @@
                                FontSize="18"
                                Panel.ZIndex="10"/>
 
-                <TextBlock x:Name="InfoDuJoueur3"
+            <TextBlock x:Name="InfoDuJoueur3"
                                Text="Main du Joueur 3 Cartes retournées Score : x mouches Etable : y vaches En attente"
                                Height="140"
                                Width="170"
@@ -58,7 +58,7 @@
                                FontSize="18"
                                Panel.ZIndex="10"/>
 
-                <TextBlock x:Name="InfoDuJoueur4"
+            <TextBlock x:Name="InfoDuJoueur4"
                                Text="Main du Joueur 4 Cartes retournées Score : x mouches Etable : y vaches En attente"
                                Height="140"
                                Width="170"
@@ -72,7 +72,7 @@
                                FontSize="18"
                                Panel.ZIndex="10"/>
 
-                <TextBlock x:Name="InfoDuJoueur5"
+            <TextBlock x:Name="InfoDuJoueur5"
                                Text="Main du Joueur 5 Cartes retournées Score : x mouches Etable : y vaches En attente"
                                Height="140"
                                Width="170"
@@ -86,45 +86,44 @@
                                FontSize="18"
                                Panel.ZIndex="10"/>
 
-            </WrapPanel>
-            <!--FIN Liste des joueurs (EN HAUT) -->
+        </WrapPanel>
+        <!--FIN Liste des joueurs (EN HAUT) -->
 
-            <!-- DEBUT Liste des Cartes du joueur en cours (EN BAS) -->
+        <!-- DEBUT Liste des Cartes du joueur en cours (EN BAS) -->
+        <StackPanel Name="panel" Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" MouseEnter="hover" MouseLeave="finhover">
 
-            <StackPanel Name="panel" Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" MouseEnter="hover" MouseLeave="finhover">
+            <Rectangle x:Name="JoueurCourantCarte1" Height="110" Width="60" Margin="20,5" Fill="FloralWhite"/>
+            <Rectangle x:Name="JoueurCourantCarte2" Height="110" Width="60" Margin="20,5" Fill="FloralWhite" MouseLeftButtonDown="BtnPoserCarte"/>
+            <Rectangle x:Name="JoueurCourantCarte3" Height="110" Width="60" Margin="20,5" Fill="FloralWhite"/>
+            <Rectangle x:Name="JoueurCourantCarte4" Height="110" Width="60" Margin="20,5" Fill="FloralWhite"/>
+            <Rectangle x:Name="JoueurCourantCarte5" Height="110" Width="60" Margin="20,5" Fill="FloralWhite"/>
 
-                <Rectangle x:Name="JoueurCourantCarte1" Height="110" Width="60" Margin="20,5" Fill="FloralWhite"/>
-                <Rectangle x:Name="JoueurCourantCarte2" Height="110" Width="60" Margin="20,5" Fill="FloralWhite" MouseLeftButtonDown="BtnPoserCarte"/>
-                <Rectangle x:Name="JoueurCourantCarte3" Height="110" Width="60" Margin="20,5" Fill="FloralWhite"/>
-                <Rectangle x:Name="JoueurCourantCarte4" Height="110" Width="60" Margin="20,5" Fill="FloralWhite"/>
-                <Rectangle x:Name="JoueurCourantCarte5" Height="110" Width="60" Margin="20,5" Fill="FloralWhite"/>
+        </StackPanel>
+        <!-- FIN Liste des Cartes du joueur en cours (EN BAS) -->
 
-            </StackPanel>
-            <!-- FIN Liste des Cartes du joueur en cours (EN BAS) -->
-
-            <!-- DEBUT Temopraire: boutons d'actions (EN BAS) (à remplacer comme dit dans Slack) -->
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button x:Name="BtnRamasser"
+        <!-- DEBUT Temopraire: boutons d'actions (EN BAS) (à remplacer comme dit dans Slack) -->
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="BtnRamasser"
                         Content="Ramasser le troupeau"
                         Click="BtnRamasserClick"
                         Height="30"
                         Width="140"
                         Margin="10"/>
 
-                <Button x:Name="BtnJouerCarte"
+            <Button x:Name="BtnJouerCarte"
                         Content="Jouer une carte"
                         Click="BtnJouerCarteClick"
                         Height="30"
                         Width="140"
                         Margin="10"/>
 
-                <Button x:Name="BtnPiocherCarte"
+            <Button x:Name="BtnPiocherCarte"
                         Content="Terminer le tour"
                         Click="BtnPiocherCarteClick"
                         Height="30"
                         Width="140"
                         Margin="10"/>
-                <Image x:Name="imagerefresh"
+            <Image x:Name="imagerefresh"
             	    Height="34"
             	    Width="33"
             	    RenderTransformOrigin="0.5,0.5"
@@ -135,110 +134,76 @@
             	    HorizontalAlignment="Center"
             	    VerticalAlignment="Center" Panel.ZIndex="2"
             	    Source="/Images/refresh.jpg">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <RotateTransform Angle="-45"/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="-45"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
 
-                <!-- DEBUT Image losange Nathan -->
-                <!-- FIN Image losange Nathan -->
+        </StackPanel>
+        <!-- FIN Temopraire: boutons d'actions (EN BAS) (à remplacer comme dit dans Slack) -->
 
-                <!-- Code de remplacement possible pour le bouton refresh
-                <Polygon
-                    x:Name="imagerefreshAlter"
-                    Stroke="Gray"
-                    StrokeThickness="0.5"
-                    Points="25, 0
-                            50, 25
-                            25, 50
-                            0, 25"
-                    TextBlock.TextAlignment="Center"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Cursor="Hand">
-                    <Polygon.Fill>
-                        <ImageBrush ImageSource="/Images/refresh.jpg" Stretch="Uniform"/>
-                    </Polygon.Fill>
-                </Polygon>
-                -->
-
-            </StackPanel>
-            <!-- FIN Temopraire: boutons d'actions (EN BAS) (à remplacer comme dit dans Slack) -->
-
-            <!-- DEBUT Boite de message (A DROITE) -->
-            <StackPanel x:Name="HistoriquePartie" DockPanel.Dock="Right">
-                <TextBlock Margin="10" TextWrapping="Wrap" Foreground="Blue">
+        <!-- DEBUT Boite de message (A DROITE) -->
+        <StackPanel x:Name="HistoriquePartie" DockPanel.Dock="Right">
+            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="Blue">
                     Premier message
-                </TextBlock>
-                <TextBlock Margin="10" TextWrapping="Wrap" Foreground="Blue">
+            </TextBlock>
+            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="Blue">
                     Deuxième message
-                </TextBlock>
-                <TextBlock Margin="10" TextWrapping="Wrap" Foreground="Blue">
+            </TextBlock>
+            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="Blue">
                     Troisième message
-                </TextBlock>
-            </StackPanel>
-            <!-- FIN Boite de message (A DROITE) -->
+            </TextBlock>
+        </StackPanel>
+        <!-- FIN Boite de message (A DROITE) -->
 
-            <!-- DEBUT Zone de jeu (Central) -->
-            <StackPanel x:Name="AireDeJeu"
-                        Background="FloralWhite"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center">
+        <!-- DEBUT Zone de jeu (Central) -->
+        <StackPanel x:Name="AireDeJeu"
+            Background="FloralWhite"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center">
 
-                <!-- DEBUT exemple de binding -->
-                <WrapPanel Margin="10" >
-                    <TextBlock Text="Window Title : "/>
-                    <TextBlock Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Width="150" />
-                </WrapPanel>
-                <WrapPanel Margin="10">
-                    <TextBlock Text="Window Dimensions : "/>
-                    <TextBox Text="{Binding Width}" Width="50"/>
-                    <TextBlock Text=" x "/>
-                    <TextBox Text="{Binding Height}" Width="50"/>
-                </WrapPanel>
-                <WrapPanel Margin="10" >
-                    <TextBlock Text="Random : "/>
-                    <TextBlock x:Name="DoraRdm" Width="100" ><InlineUIContainer>
-                		    <Label x:Name="label" Content="" Height="21" Width="95"/>
-                	    </InlineUIContainer></TextBlock>
-                </WrapPanel>
-                <!-- FIN exemple de binding -->
+            <!-- DEBUT exemple de binding -->
+            <WrapPanel Margin="10" >
+                <TextBlock Text="Window Title : "/>
+                <TextBlock Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+            </WrapPanel>
+            <!-- FIN exemple de binding -->
 
-                <!-- DEBUT PiocheEtSens -->
-                <WrapPanel Margin="10"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center">
-                    <Rectangle x:Name="Pioche"
-                               Height="110"
-                               Width="60"
-                               Fill="#FF6E5F5F"
-                               Margin="5"/>
-                    <Rectangle x:Name="SensDuJeu"
-                               Height="60"
-                               Width="110"
-                               Fill="Aquamarine"
-                               Margin="5"/>
-                </WrapPanel>
-                <!-- FIN PiocheEtSens -->
+            <!-- DEBUT PiocheEtSens -->
+            <WrapPanel Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                <Rectangle x:Name="Pioche"
+                    Height="110"
+                    Width="60"
+                    Fill="#FF6E5F5F"
+                    Margin="5"/>
+                <Rectangle x:Name="SensDuJeu"
+                    Height="60"
+                    Width="110"
+                    Fill="Aquamarine"
+                    Margin="5"/>
+            </WrapPanel>
+            <!-- FIN PiocheEtSens -->
 
-                <!-- DEBUT Troupeau -->
-                <WrapPanel x:Name="Troupeau"
-                           Margin="10"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Panel.ZIndex="20"
-                           DragEnter="Troupeau_DragEnter">
-                    <Rectangle x:Name="Card0" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
-                    <Rectangle x:Name="Card1" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
-                    <Rectangle x:Name="Card2" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
-                    <Rectangle x:Name="Card3" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
-                </WrapPanel>
-                <!-- FIN Troupeau -->
-            </StackPanel>
-            <!-- FIN Zone de jeu (Central) -->
+            <!-- DEBUT Troupeau -->
+            <WrapPanel x:Name="Troupeau"
+                Margin="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Panel.ZIndex="20"
+                DragEnter="Troupeau_DragEnter">
+                <Rectangle x:Name="Card0" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
+                <Rectangle x:Name="Card1" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
+                <Rectangle x:Name="Card2" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
+                <Rectangle x:Name="Card3" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
+            </WrapPanel>
+            <!-- FIN Troupeau -->
+        </StackPanel>
+        <!-- FIN Zone de jeu (Central) -->
 
-        </DockPanel>
+    </DockPanel>
 
 </Window>
