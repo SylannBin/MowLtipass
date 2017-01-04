@@ -33,7 +33,7 @@ namespace MowGame.Main
         Partie partie = new Partie();
         Manche manche = new Manche();
         Carte carteJoueur = new Carte();
-
+        
 
         Joueur J1 = new Joueur(id: 0, pseudo: "Romain", race: "Humain");
         Joueur J2 = new Joueur(id: 1, pseudo: "Nathan", race: "Humain");
@@ -53,6 +53,31 @@ namespace MowGame.Main
              * - début de partie, de manche -> variables à instancier, constructeurs à appeler
              * - ...
              */
+
+            // La partie continue tant que Continue return true.
+            while (partie.Continue)
+            {
+                manche.MelangerPioche();
+                foreach (Joueur joueur in partie.Joueurs)
+                {
+                    for (int i = 0; i < partie.Joueurs.Count(); i++)
+                    {
+                        joueur.MainDuJoueur.Add(manche.Pioche.Pop());
+                    }
+                }
+
+                
+                // La manche continue tant que la piche ET le troupeau ne sont pas vide.
+                while(manche.Pioche.Count != 0 && manche.Troupeau.Count != 0)
+                {
+                    // le joueur fait son tour
+                    partie.Joueurs
+                    partie.JoueurSuivant();
+                }
+            }
+
+
+             
 
             // Exemple ci-dessous (vu ensemble hier)
             //

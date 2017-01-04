@@ -26,7 +26,7 @@ namespace MowLtipass.Core
         /// AntiHoraire (0): Joueur précédent ou dernier joueur de la liste
         /// Horaire (1):     Joueur suivant ou premier joueur de la liste
         /// </summary>
-        public void Suivant()
+        public void JoueurSuivant()
         {
             if (SensDeJeu == SensDeJeu.Horaire)
                 JoueurEnCours = (JoueurEnCours == Joueurs.Count - 1)
