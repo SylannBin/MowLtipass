@@ -73,7 +73,7 @@ namespace MowGame.Main
              * - début de partie, de manche -> variables à instancier, constructeurs à appeler
              * - ...
              */
-             // TODO : Thread this shit
+            // TODO : Thread this shit
             // La partie continue tant que Continue return true.
             while (partie.Continue())
             {
@@ -90,6 +90,7 @@ namespace MowGame.Main
                 // La manche continue tant que la piche ET le troupeau ne sont pas vide.
                 while(manche.Pioche.Count != 0 && manche.Troupeau.Count != 0)
                 {
+                    //
                     // le joueur fait son tour
                     partie.JoueurSuivant();
                 }
@@ -238,9 +239,12 @@ namespace MowGame.Main
             // Il faut choisir une carte (ici, je met en dur, mais il faut la récupérer avec le clic souris)
             Carte carte = new Carte();
 
-            // 
+            // Teste si la carte eset jouable, la place si c'est possible -> joueur suivant
             partie.JoueurEnCours.Jouer(manche, carte);
             MessageBox.Show(partie.JoueurEnCours.Pseudo + " a joué la carte " + carte);
+
+            // Si pioche non vide -> piocher
+            // Sinon teste ramasser -> fin de jeu possible
 
         }
 

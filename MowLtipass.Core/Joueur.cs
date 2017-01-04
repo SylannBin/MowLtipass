@@ -56,7 +56,10 @@ namespace MowLtipass.Core
         /// </summary>
         public void Piocher(Manche manche)
         {
-            MainDuJoueur.Add(manche.Pioche.Pop());
+            if (MainDuJoueur.Count != 0)
+            {
+                MainDuJoueur.Add(manche.Pioche.Pop());
+            }
         }
 
 
@@ -71,6 +74,7 @@ namespace MowLtipass.Core
             {
                 manche.Troupeau.Add(carteJouee);
                 MainDuJoueur.Remove(carteJouee);
+                Piocher(manche);
             }
         }
 
@@ -82,12 +86,15 @@ namespace MowLtipass.Core
         /// </summary>
         public void Ramasser<T>(T cartes, Manche manche) where T : IList<Carte>
         {
-            // Compte le score
-            MAJScore(cartes); 
-            // Ajoute les cartes à l'étable
-            Etable.AddRange(cartes);
-            // Vide l'ensemble de carte (manche.Troupeau ou MainDuJoueur)
-            cartes.Clear();
+            if(cartes.Count != 0)
+            {
+                // Compte le score
+                MAJScore(cartes);
+                // Ajoute les cartes à l'étable
+                Etable.AddRange(cartes);
+                // Vide l'ensemble de carte (manche.Troupeau ou MainDuJoueur)
+                cartes.Clear();
+            }
         }
 
 
