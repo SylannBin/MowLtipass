@@ -278,7 +278,7 @@ namespace MowLtipass.Core
                     int index = Troupeau.IndexOf(Troupeau.Where(cartePlacee =>
                          Troupeau.ElementAt(Troupeau.IndexOf(cartePlacee) + 1).Numero == cartePlacee.Numero + 2)
                          .First()) + 1;
-                    Troupeau.Insert(index, carteJoueur);
+                    carteJoueur.Numero = Troupeau.ElementAt(index + 1).Numero;
                 }
 
                 // acrobate : emplacement (carte placée de même numéro)
