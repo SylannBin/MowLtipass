@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace MowLtipass.Core
@@ -75,24 +76,27 @@ namespace MowLtipass.Core
 
 
         /// <summary>
-        /// Enlève les cartes présentes dans Troupeau, les ajoute à l'étable du joueur.
+        /// Enlève les cartes présentes dans l'ensemble générique de cartes (troupeau ou MainDuJoueur),
+        /// les ajoute à l'étable du joueur.
         /// Exécute MAJScore() (compte les mouches et ajoute le résultat au score)
         /// </summary>
-        public void Ramasser(Manche manche)
+        public void Ramasser<T>(T cartes, Manche manche) where T : IList<Carte>
         {
-            Etable.AddRange(manche.Troupeau);
-            manche.Troupeau.Clear();
-            MAJScore();
+            // Compte le score
+            MAJScore(cartes); 
+            // Ajoute les cartes à l'étable
+            Etable.AddRange(cartes);
+            // Vide l'ensemble de carte (manche.Troupeau ou MainDuJoueur)
+            cartes.Clear();
         }
 
 
         /// <summary>
-        /// Compter les mouches dans l'étable et attribuer le résultat au score du joueur
+        /// Ajoute les mouches d'un ensemble de carte au score du joueur
         /// </summary>
-        private void MAJScore()
+        private void MAJScore<T>(T cartes) where T : IList<Carte>
         {
-            Score = 0;
-            foreach (Carte carte in Etable)
+            foreach (Carte carte in cartes)
             {
                 Score += carte.NbMouche;
             }

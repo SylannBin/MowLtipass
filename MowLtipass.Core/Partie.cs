@@ -38,6 +38,22 @@ namespace MowLtipass.Core
                     : JoueurEnCours - 1;
         }
 
+
+        /// <summary>
+        /// Renvoie vrai si au moins un joueur a dépassé un score de 100 points
+        /// Faux si aucun joueur n'a atteint ce score
+        /// </summary>
+        /// <returns></returns>
+        public bool Continue()
+        {
+            // Si au moins 1 joueur a plus de 100 points
+            foreach(Joueur joueur in Joueurs)
+                if (joueur.Score >= 100)
+                    return true;
+            // Sinon ...
+            return false;
+        }
+
         /// <summary>
         /// CONSTRUCTEUR
         /// 

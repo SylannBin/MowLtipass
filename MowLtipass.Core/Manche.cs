@@ -142,45 +142,46 @@ namespace MowLtipass.Core
         }
 
         #region Melange des cartes
-        /// <summary>
-        /// Renvoie un nombre aléatoire compris entre min inclu et max exclu
-        /// </summary>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <returns>int</returns>
-        public RNGCryptoServiceProvider _RNG = new RNGCryptoServiceProvider();
-        public int GetRnd(int min, int max)
-        {
-            byte[] rndBytes = new byte[4];
-            _RNG.GetBytes(rndBytes);
-            int rand = BitConverter.ToInt32(rndBytes, 0);
-            const Decimal OldRange = (Decimal)int.MaxValue - (Decimal)int.MinValue;
-            Decimal NewRange = max - min;
-            Decimal NewValue = ((Decimal)rand - (Decimal)int.MinValue) / OldRange * NewRange + (Decimal)min;
-            return (int)NewValue;
-        }
 
         /// <summary>
         /// Ajoute de manière aléatoire les 48 cartes du jeu dans la pioche
         /// </summary>
         /// <typeparam name="T">Objet de type "Vache" avec trois propriétés ( Valeur - nb_mouches - Categorie )</typeparam>
-        private void Shuffle<T>(IList<T> listeDesCartes)
+        private void Shuffle<T>(IList<T> liste)
         {
-            RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
-            int n = listeDesCartes.Count;
+            // Générateur de vrais nombres aléatoires
+            RNGCryptoServiceProvider Random = new RNGCryptoServiceProvider();
+
+            // Nombre d'élément dans la liste
+            int n = liste.Count;
+
+            // pour chaque élément de la liste
             while (n > 1)
             {
-                byte[] box = new byte[1];
+                // Conteneur de valeurs aléatoires
+                byte[] mixer = new byte[1];
+                
+                int coef;
+                bool tropGrand;
 
-                do provider.GetBytes(box);
-                while (!(box[0] < n * (Byte.MaxValue / n)));
+                // Génère une place aléatoire pour l'élément en cours
+                do
+                {
+                    Random.GetBytes(mixer);
+                    coef = n * (Byte.MaxValue / n); // pas trop compris
+                    tropGrand = mixer[0] >= coef;
+                }
+                while (tropGrand);
 
-                int k = (box[0] % n);
+
+                int k = (mixer[0] % n);
+                // décrémente n
                 n--;
 
-                T tmpValue = listeDesCartes[k];
-                listeDesCartes[k] = listeDesCartes[n];
-                listeDesCartes[n] = tmpValue;
+                // Inverse les éléments en k et n dans la liste
+                T tmpValue = liste[k];
+                liste[k] = liste[n];
+                liste[n] = tmpValue;
             }
         }
 
