@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace MowLtipass.Core
 {
@@ -13,29 +14,44 @@ namespace MowLtipass.Core
         /// <summary>
         /// Joueur qui est en train de joueur
         /// </summary>
-        public int JoueurEnCours { get; set; }
+        public Joueur JoueurEnCours { get; set; }
 
         /// <summary>
         /// Indique dans quel sens le jeu se déroule, et donc quel joueur sera le suivant
         /// </summary>
         public SensDeJeu SensDeJeu { get; set; }
 
+        /// <summary>
+        /// Ajoute un joueur à la liste des joueurs de la partie s'il reste de la place
+        /// </summary>
+        public void inscrireJoueur(Joueur joueur)
+        {
+            if (Joueurs.Count < 5)
+                Joueurs.Add(joueur);
+        }
+
 
         /// <summary>
-        /// Passe au joueur suivant
-        /// AntiHoraire (0): Joueur précédent ou dernier joueur de la liste
-        /// Horaire (1):     Joueur suivant ou premier joueur de la liste
+        /// Attribue à l'objet Joueur en cours, le joueur suivant selon le sens de jeu
+        /// et le joueur actuel
         /// </summary>
         public void JoueurSuivant()
         {
+            // Position du joueur dans la liste
+            int index = Joueurs.IndexOf(JoueurEnCours);
+
+            // Horaire (1): Joueur suivant ou premier joueur de la liste
             if (SensDeJeu == SensDeJeu.Horaire)
-                JoueurEnCours = (JoueurEnCours == Joueurs.Count - 1)
-                    ? 0
-                    : JoueurEnCours + 1;
+                // Si Le joueur courant est le dernier de la liste, on revient à 0, sinon suivant
+                JoueurEnCours = (index == Joueurs.Count - 1)
+                    ? Joueurs.First()
+                    : Joueurs.ElementAt(index + 1);
+            // AntiHoraire (0): Joueur précédent ou dernier joueur de la liste
             else
-                JoueurEnCours = (JoueurEnCours == 0)
-                    ? Joueurs.Count - 1
-                    : JoueurEnCours - 1;
+                // Si Le joueur courant est le premier de la liste, on va à la fin de la liste, sinon précédent
+                JoueurEnCours = (index == 0)
+                    ? Joueurs.Last()
+                    : Joueurs.ElementAt(index - 1);
         }
 
 
@@ -62,7 +78,6 @@ namespace MowLtipass.Core
         {
             // Propriétés par défaut
             Joueurs = new List<Joueur>();
-            JoueurEnCours = 0;
             SensDeJeu = SensDeJeu.Horaire;
         }
 
