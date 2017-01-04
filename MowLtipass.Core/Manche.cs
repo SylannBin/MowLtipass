@@ -271,6 +271,16 @@ namespace MowLtipass.Core
             if (EstJouable(carteJoueur))
             {
                 // retardataire : récupérer l'emplacement (le premier vide entre 2 cartes (intervalle 1)
+                // TODO : A relire juste pour voir si c'est cohérent niveau algo
+                // WARNING : Ne refais pas tout si ça marche, Romain.
+                if(carteJoueur.TypeDeCarte == TypesDeCarte.acrobate)
+                {
+                   int index = Troupeau.IndexOf(Troupeau.Where(cartePlacee =>
+                        carteJoueur.TypeDeCarte == TypesDeCarte.retardataire &&
+                        Troupeau.ElementAt(Troupeau.IndexOf(cartePlacee) + 1).Numero == cartePlacee.Numero + 2)
+                        .First()) + 1;
+                    Troupeau.Insert(index, carteJoueur);
+                }
                 // acrobate : emplacement (carte placée de même numéro)
                 // le reste : si plus petite que First => first - 1
                 //            si plus grande que Last => Last + 1
