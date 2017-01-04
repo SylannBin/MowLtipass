@@ -17,7 +17,7 @@
         /// Contient le path complet vers l'image à afficher :
         /// ex : "C:\temp\vache3.jpg"
         /// </summary>
-        public string CheminImage { get; set; }
+        public string NomImage { get; set; }
 
         /// <summary>
         /// Indique la catégorie de vache à laquelle correspond la carte
