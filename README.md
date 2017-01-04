@@ -5,33 +5,6 @@ Il s'agit d'un projet développé sous-visual studio 2015.
 L'objectif est de reproduire le jeu de carte MOW à l'aide du Framework WPF.
 Il devrait permettre à un ou plusieurs joueurs humains de s'opposer entre eux ou face à des IA.
 
-## Rôles des membres du projet
-
-* Romain:  Lead, logique globale
-* Florian: Contenu UI, déroulement
-* Nathan:  Spécificités des cartes
-* Théo:    Logique actions possibles d'un joueur
-
-## Premiers Objectifs: Poser la structure de l'application
-
-* Déterminer l'ensemble des classes et interfaces
-* Lister les principales méthodes et propriétés
-* Jeter les bases de l'interface graphique
-* Coder les cartes du jeu avec leurs spécificités
-
-## Objectifs secondaires: 
-
-* Stocker l'état d'une partie dans un fichier, pour pouvoir la reprendre en cas d'extinction du program (volontaire ou non)
-* Stocker les statistiques de jeu pour pouvoir les utiliser sur le long terme.
-
-## Prochaine étape: Le workflow, de l'algorithmie au développement
-
-1. Décrire une classe, interface, ou principale fonctionnalité, d'un point de vue global
-2. Transmettre des noms de méthode avec les inputs prévus, et l'output attendu
-3. Sortir l'algorithmie de cette méthode, préciser le déroulement, la logique d'exécution
-4. Coder la méthode
-5. Intégrer au programme
-
 # Le design
 
 * Résolution: 1024x768

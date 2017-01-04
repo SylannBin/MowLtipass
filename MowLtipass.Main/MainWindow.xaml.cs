@@ -73,9 +73,9 @@ namespace MowGame.Main
              * - début de partie, de manche -> variables à instancier, constructeurs à appeler
              * - ...
              */
-
+             // TODO : Thread this shit
             // La partie continue tant que Continue return true.
-            while (partie.Continue)
+            while (partie.Continue())
             {
                 manche.MelangerPioche();
                 foreach (Joueur joueur in partie.Joueurs)
@@ -91,7 +91,6 @@ namespace MowGame.Main
                 while(manche.Pioche.Count != 0 && manche.Troupeau.Count != 0)
                 {
                     // le joueur fait son tour
-                    partie.Joueurs
                     partie.JoueurSuivant();
                 }
             }
@@ -230,8 +229,8 @@ namespace MowGame.Main
         private void BtnRamasserClick(object sender, RoutedEventArgs e)
         {
             // exemple:
-            J1.Ramasser(manche);
-            MessageBox.Show(J1.Pseudo + " a rammassé le troupeau !");
+            partie.JoueurEnCours.Ramasser(manche.Troupeau, manche);
+            MessageBox.Show(partie.JoueurEnCours.Pseudo + " a rammassé le troupeau !");
         }
 
         public void BtnJouerCarteClick(object sender, RoutedEventArgs e) // Rends les cartes cliquable et prévient l'utilisateur  
@@ -240,8 +239,8 @@ namespace MowGame.Main
             Carte carte = new Carte();
 
             // 
-            J1.Jouer(manche, carte);
-            MessageBox.Show(J1.Pseudo + " a joué la carte " + carte);
+            partie.JoueurEnCours.Jouer(manche, carte);
+            MessageBox.Show(partie.JoueurEnCours.Pseudo + " a joué la carte " + carte);
 
         }
 
