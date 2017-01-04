@@ -61,7 +61,7 @@ namespace MowLtipass.Core
                     Numero = i,
                     NbMouche = 0,
                     TypeDeCarte = TypesDeCarte.standard,
-                    CheminImage = "standard_" + i.ToString() + "_0.jpeg"
+                    NomImage = "standard_" + i.ToString() + "_0.jpeg"
                 });
             }
 
@@ -72,7 +72,7 @@ namespace MowLtipass.Core
                     Numero = i,
                     NbMouche = 1,
                     TypeDeCarte = TypesDeCarte.standard,
-                    CheminImage = "standard_" + i.ToString() + "_1.jpeg"
+                    NomImage = "standard_" + i.ToString() + "_1.jpeg"
                 });
             }
 
@@ -83,7 +83,7 @@ namespace MowLtipass.Core
                     Numero = i,
                     NbMouche = 2,
                     TypeDeCarte = TypesDeCarte.standard,
-                    CheminImage = "standard_" + i.ToString() + "_2.jpeg"
+                    NomImage = "standard_" + i.ToString() + "_2.jpeg"
                 });
             }
 
@@ -94,7 +94,7 @@ namespace MowLtipass.Core
                     Numero = i,
                     NbMouche = 3,
                     TypeDeCarte = TypesDeCarte.standard,
-                    CheminImage = "standard_" + i.ToString() + "_3.jpeg"
+                    NomImage = "standard_" + i.ToString() + "_3.jpeg"
                 });
             }
 
@@ -102,42 +102,42 @@ namespace MowLtipass.Core
                 Numero = 0,
                 NbMouche = 5,
                 TypeDeCarte = TypesDeCarte.serreFile,
-                CheminImage = "serreFile_0_5.jpeg"
+                NomImage = "serreFile_0_5.jpeg"
             });
 
             listeDesCartes.Add(new Carte() {
                 Numero = 16,
                 NbMouche = 5,
                 TypeDeCarte = TypesDeCarte.serreFile,
-                CheminImage = "serreFile_16_5.jpeg"
+                NomImage = "serreFile_16_5.jpeg"
             });
 
             listeDesCartes.Add(new Carte() {
                 Numero = 7,
                 NbMouche = 5,
                 TypeDeCarte = TypesDeCarte.acrobate,
-                CheminImage = "acrobate_7_5.jpeg"
+                NomImage = "acrobate_7_5.jpeg"
             });
 
             listeDesCartes.Add(new Carte() {
                 Numero = 9,
                 NbMouche = 5,
                 TypeDeCarte = TypesDeCarte.acrobate,
-                CheminImage = "acrobate_9_5.jpeg"
+                NomImage = "acrobate_9_5.jpeg"
             });
 
             listeDesCartes.Add(new Carte() {
                 Numero = -1,
                 NbMouche = 5,
                 TypeDeCarte = TypesDeCarte.retardataire,
-                CheminImage = "retardataire.jpeg"
+                NomImage = "retardataire.jpeg"
             });
 
             listeDesCartes.Add(new Carte() {
                 Numero = -1,
                 NbMouche = 5,
                 TypeDeCarte = TypesDeCarte.retardataire,
-                CheminImage = "retardaataire.jpeg"
+                NomImage = "retardaataire.jpeg"
             });
         }
 
