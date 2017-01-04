@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MowLtipass.Core
+﻿namespace MowLtipass.Core
 {
     /// <summary>
     /// Les deux sens possibles dans lequel tourne le jeu.
