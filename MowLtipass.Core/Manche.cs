@@ -127,14 +127,14 @@ namespace MowLtipass.Core
             });
 
             listeDesCartes.Add(new Carte() {
-                Numero = 0,
+                Numero = -1,
                 NbMouche = 5,
                 TypeDeCarte = TypesDeCarte.retardataire,
                 CheminImage = "retardataire.jpeg"
             });
 
             listeDesCartes.Add(new Carte() {
-                Numero = 0,
+                Numero = -1,
                 NbMouche = 5,
                 TypeDeCarte = TypesDeCarte.retardataire,
                 CheminImage = "retardaataire.jpeg"
@@ -219,25 +219,83 @@ namespace MowLtipass.Core
         /// </summary>
         public bool TroupeauComplet()
         {
-            return Troupeau.Count == 17;
+            return Troupeau.Count == 19; //  1 2 3 <> 5 6 77  99 10 11 12 13 14 15 16
         }
 
         /// <summary>
-        /// Renvoie faux si une carte du troupeau a la valeur passée en paramêtre
-        /// A l'inverse, si aucune carte ne correspond, renvoie true.
-        /// La valeur n'a rien à voir avec l'emplacement dans le tableau !
+        /// Renvoie vrai, si la carte peut être placée dans le troupeau, faux sinon.
+        /// Elimine les cas "vrai", puis renvoie faux par défaut
         /// </summary>
-        public bool Jouable(Carte carteJoueur)
+        /// <param name="carteJoueur">La carte que l'on essaie de jouer</param>
+        /// <returns>bool</returns>
+        public bool EstJouable(Carte carteJoueur)
         {
+            // Ex Troupeau:      5 <> 7 <> 9 10 12 13
+            // Parcourt chaque carte placée dans le troupeau
             foreach (Carte cartePlacee in Troupeau)
             {
-                if (cartePlacee == carteJoueur)
+                // Si la carte est acrobate et son numéro est égal à 7 OU à 9
+                if (carteJoueur.TypeDeCarte == TypesDeCarte.acrobate && carteJoueur.Numero == cartePlacee.Numero)
                 {
-                    return false;
+                    return true;
+                }
+                
+                // Si la carte est retardataire, elle doit s'inserer entre 2 cartes (où l'intervalle vaut 1)
+                if (carteJoueur.TypeDeCarte == TypesDeCarte.retardataire &&
+                    Troupeau.ElementAt(Troupeau.IndexOf(cartePlacee) + 1).Numero == cartePlacee.Numero + 2)
+                {
+                    return true;
                 }
             }
-            return true;
+
+            // La carte standard que l'on essaie de jouer est bien plus grande que la plus grande du troupeau
+            //                                                  OU plus petite que la plus petite du troupeau
+            if (carteJoueur.Numero < Troupeau.First().Numero || carteJoueur.Numero > Troupeau.Last().Numero)
+            {
+                return true;
+            }
+
+            // Si aucune condition ne permet de valider la carte, on  ne peut pas la jouer
+            return false;
         }
+
+
+        /// <summary>
+        /// Teste si la carte est jouable
+        /// Si oui, joue la carte (la met à l'emplacement correct) et renvoie true
+        /// Sinon, renvoie false
+        /// </summary>
+        /// <return>bool</return>
+        public void PlacerCarte(Carte carteJoueur, out bool result)
+        {
+            if (EstJouable(carteJoueur))
+            {
+                // retardataire : récupérer l'emplacement (le premier vide entre 2 cartes (intervalle 1)
+                // TODO : A relire juste pour voir si c'est cohérent niveau algo
+                // WARNING : Ne refais pas tout si ça marche, Romain.
+                if(carteJoueur.TypeDeCarte == TypesDeCarte.acrobate)
+                {
+                   int index = Troupeau.IndexOf(Troupeau.Where(cartePlacee =>
+                        carteJoueur.TypeDeCarte == TypesDeCarte.retardataire &&
+                        Troupeau.ElementAt(Troupeau.IndexOf(cartePlacee) + 1).Numero == cartePlacee.Numero + 2)
+                        .First()) + 1;
+                    Troupeau.Insert(index, carteJoueur);
+                }
+                // acrobate : emplacement (carte placée de même numéro)
+                // le reste : si plus petite que First => first - 1
+                //            si plus grande que Last => Last + 1
+                result = true;
+            }
+            // si ce n'est pas jouable 
+            else
+            {
+                result = false;
+
+            }
+        }
+
+        
+
 
         /// <summary>
         /// Retourne Vrai si la pioche ne contient aucune carte, faux dans le cas contraire
