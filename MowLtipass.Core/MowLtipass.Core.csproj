@@ -40,9 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bot.cs" />
     <Compile Include="Carte.cs" />
-    <Compile Include="Humain.cs" />
     <Compile Include="Joueur.cs" />
     <Compile Include="Manche.cs" />
     <Compile Include="Partie.cs" />

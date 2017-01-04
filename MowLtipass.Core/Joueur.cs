@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MowLtipass.Core
 {
@@ -11,6 +7,9 @@ namespace MowLtipass.Core
     {
         /* Propriétés */
 
+        // Liste des noms des joueurs IA
+        public string[] botNames = { "Jeremy", "Sarah", "Jack", "George", "Marie", "Hasan", "Sung Li", "Nikolaï", "R209",
+            "EvilSylann", "Evildji_AC", "WhiteValsov", "EvilDrNate" };
 
         /// <summary>
         /// Main du joueur. Contient jusqu'à 5 cartes (Vache)
@@ -29,19 +28,23 @@ namespace MowLtipass.Core
         /// <summary>
         /// Score total du joueur au cours d'une partie (init à 0). Ajoute le total nb_mouche à chaque fin de tour
         /// </summary>
-        public int score { get; set; } = 0;
+        public int Score { get; set; }
 
         /// <summary>
         /// Identifiant unique du joueur (numéro de 0 à 4)
         /// </summary>
-        public int id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Nom du joueur, entré au début de la partie pour un humain et choisit alétoirement dans une liste pour un joueur IA
         /// </summary>
-        public virtual string Pseudo { get; set; }
+        public string Pseudo { get; set; }
 
 
+        /// <summary>
+        /// Type de joueur
+        /// </summary>
+        public string Race { get; set; }
 
         /* Méthodes */
 
@@ -63,7 +66,7 @@ namespace MowLtipass.Core
         /// <param name="carteJouee"></param>
         public void Jouer(Manche manche, Carte carteJouee)
         {
-            if(manche.EstJouable(carteJouee) == true)
+            if (manche.Jouable(carteJouee))
             {
                 manche.Troupeau.Add(carteJouee);
                 MainDuJoueur.Remove(carteJouee);
@@ -88,10 +91,10 @@ namespace MowLtipass.Core
         /// </summary>
         private void MAJScore()
         {
-            score = 0;
-            foreach(Carte carte in Etable)
+            Score = 0;
+            foreach (Carte carte in Etable)
             {
-                score += carte.NbMouche;
+                Score += carte.NbMouche;
             }
         }
 
@@ -103,5 +106,29 @@ namespace MowLtipass.Core
         {
             manche.sens = (manche.sens == SensDeJeu.Horaire) ? SensDeJeu.AntiHoraire : SensDeJeu.Horaire;
         }
+
+
+        public Joueur(int id, string pseudo, string race)
+        {
+            this.Id = id;
+            this.Pseudo = pseudo;
+            this.Race = race;
+            this.Score = 0;
+            /*
+            // Générateur de nombre aléatoire
+            Random random = new Random();
+        
+            // Selon la race, génère un nom ou
+            if (Race == "Humain")
+            {
+                Pseudo = botNames[random.Next(botNames.Length)];
+            }
+            else
+            {
+                Pseudo = nom;
+            }
+            */
+        }        
+    
     }
 }
