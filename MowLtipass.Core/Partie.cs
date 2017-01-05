@@ -78,6 +78,14 @@ namespace MowLtipass.Core
         {
             // Propriétés par défaut
             Joueurs = new List<Joueur>();
+            Joueur J1 = new Joueur(id: 0, pseudo: "Romain", race: "Humain");
+            Joueur J2 = new Joueur(id: 1, pseudo: "Nathan", race: "Humain");
+            Joueur J3 = new Joueur(id: 1, pseudo: "Théo", race: "Humain");
+
+            Joueurs.Add(J1);
+            Joueurs.Add(J2);
+            Joueurs.Add(J3);
+
             SensDeJeu = SensDeJeu.Horaire;
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace MowLtipass.Core
 {
@@ -58,7 +59,8 @@ namespace MowLtipass.Core
         {
             if (MainDuJoueur.Count != 0)
             {
-                MainDuJoueur.Add(manche.Pioche.Pop());
+                MainDuJoueur.Add(manche.Pioche.ElementAt(manche.Pioche.Count - 1));
+                manche.Pioche.RemoveAt(manche.Pioche.Count - 1);
             }
         }
 

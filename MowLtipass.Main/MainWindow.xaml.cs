@@ -117,7 +117,10 @@ namespace MowGame.Main
             {
                 for (int i = 0; i < partie.Joueurs.Count(); i++)
                 {
-                    joueur.MainDuJoueur.Add(manche.Pioche.Pop());
+                    //joueur.MainDuJoueur.Add(manche.Pioche.Pop());
+
+                    joueur.MainDuJoueur.Add(manche.Pioche.ElementAt(manche.Pioche.Count - 1));
+                    manche.Pioche.RemoveAt(manche.Pioche.Count - 1);
                 }
             }
 
@@ -165,11 +168,11 @@ namespace MowGame.Main
             var srcAcrobate9 = new Uri(Path.Combine(DossierImages, "acrobate9.jpg"));
 
             // Déclaration fichier source des Cartes présentes dans la main
-            var uriSource1 = new Uri(Path.Combine(DossierImages, "standard4_1.jpg"));
-            var uriSource2 = new Uri(Path.Combine(DossierImages, "acrobate9.jpg"));
-            var uriSource3 = new Uri(Path.Combine(DossierImages, "default.jpg"));
-            var uriSource4 = new Uri(Path.Combine(DossierImages, "default.jpg"));
-            var uriSource5 = new Uri(Path.Combine(DossierImages, "default.jpg"));
+            var uriSource1 = new Uri(Path.Combine(DossierImages, partie.JoueurEnCours.MainDuJoueur.First().NomImage));
+            var uriSource2 = new Uri(Path.Combine(DossierImages, partie.JoueurEnCours.MainDuJoueur.ElementAt(1).NomImage));
+            var uriSource3 = new Uri(Path.Combine(DossierImages, partie.JoueurEnCours.MainDuJoueur.ElementAt(2).NomImage));
+            var uriSource4 = new Uri(Path.Combine(DossierImages, partie.JoueurEnCours.MainDuJoueur.ElementAt(3).NomImage));
+            var uriSource5 = new Uri(Path.Combine(DossierImages, partie.JoueurEnCours.MainDuJoueur.ElementAt(4).NomImage));
             var uriSource6 = new Uri(Path.Combine(DossierImages, "up.jpg"));
 
             // Initialisation

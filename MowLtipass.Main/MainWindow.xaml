@@ -116,13 +116,6 @@
                         Height="30"
                         Width="140"
                         Margin="10"/>
-
-            <Button x:Name="BtnPiocherCarte"
-                        Content="Terminer le tour"
-                        Click="BtnPiocherCarteClick"
-                        Height="30"
-                        Width="140"
-                        Margin="10"/>
             <Image x:Name="imagerefresh"
             	    Height="34"
             	    Width="33"

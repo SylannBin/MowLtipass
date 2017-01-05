@@ -28,7 +28,7 @@ namespace MowLtipass.Core
         /// Mélangé au début de chaque manche.
         /// Lorsque la pioche est vide, le premier joueur qui ramasse le troupeau met fin à la manche.
         /// </summary>
-        public Stack<Carte> Pioche { get; set; }
+        public List<Carte> Pioche { get; set; }
 
         /// <summary>
         /// Zone de jeu principale, contient au max une carte de chaque Numero
@@ -40,6 +40,7 @@ namespace MowLtipass.Core
 
 
         /* Méthodes */
+
 
 
         /// <summary>
@@ -197,23 +198,24 @@ namespace MowLtipass.Core
 
             // revide la pioche au cas où
             Pioche.Clear();
+            Shuffle(Pioche);
 
             // Jusqu'à ce que la pioche soit complète
-            for (int i=0; i<48; i++)
-            {
-                // Génère un nombre aléatoire entre 0 et 48 qui ne soit pas déjà utilisé
-                int randomNumber = -1;
-                while (numeroUtilises.Contains(randomNumber))
-                {
-                    randomNumber = randomGenerator.Next(48);
-                }
+            //for (int i=0; i<48; i++)
+            //{
+            //    // Génère un nombre aléatoire entre 0 et 48 qui ne soit pas déjà utilisé
+            //    int randomNumber = -1;
+            //    while (numeroUtilises.Contains(randomNumber))
+            //    {
+            //        randomNumber = randomGenerator.Next(48);
+            //    }
 
-                // Ajoute à la pioche, la carte située à l'emplacement indiqué par le nombre aléatoire.
-                Pioche.Push(listeDesCartes.ElementAt(randomNumber));
+            //    // Ajoute à la pioche, la carte située à l'emplacement indiqué par le nombre aléatoire.
+            //    Pioche.Push(listeDesCartes.ElementAt(randomNumber));
 
-                // Ajoute l'emplacement à la liste des numéros utilisés
-                numeroUtilises.Add(randomNumber);
-            }   
+            //    // Ajoute l'emplacement à la liste des numéros utilisés
+            //    numeroUtilises.Add(randomNumber);
+            //}   
         }
         #endregion
 
@@ -342,7 +344,7 @@ namespace MowLtipass.Core
         public Manche()
         {
             Troupeau = new ObservableCollection<Carte>();
-            Pioche = new Stack<Carte>();
+            Pioche = new List<Carte>();
             listerLesCartes();
             MelangerPioche();
         }
