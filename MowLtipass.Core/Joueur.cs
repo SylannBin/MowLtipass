@@ -64,22 +64,6 @@ namespace MowLtipass.Core
 
 
         /// <summary>
-        /// Enlève la carte en paramêtre de la main du joueur, et la place dans le troupeau.
-        /// SSI c'est possible (vérifier que l'emplacement est libre)
-        /// </summary>
-        /// <param name="carteJouee"></param>
-        public void Jouer(Manche manche, Carte carteJouee)
-        {
-            if (manche.EstJouable(carteJouee))
-            {
-                manche.Troupeau.Add(carteJouee);
-                MainDuJoueur.Remove(carteJouee);
-                Piocher(manche);
-            }
-        }
-
-
-        /// <summary>
         /// Enlève les cartes présentes dans l'ensemble générique de cartes (troupeau ou MainDuJoueur),
         /// les ajoute à l'étable du joueur.
         /// Exécute MAJScore() (compte les mouches et ajoute le résultat au score)
@@ -115,7 +99,7 @@ namespace MowLtipass.Core
         /// </summary>
         public void ChangerSensDeJeu(Manche manche)
         {
-            manche.sens = (manche.sens == SensDeJeu.Horaire) ? SensDeJeu.AntiHoraire : SensDeJeu.Horaire;
+            manche.Sens = (manche.Sens == SensDeJeu.Horaire) ? SensDeJeu.AntiHoraire : SensDeJeu.Horaire;
         }
 
 

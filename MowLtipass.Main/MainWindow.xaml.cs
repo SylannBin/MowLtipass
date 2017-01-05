@@ -46,17 +46,13 @@ namespace MowGame.Main
         // Chemin vers le dossier contenant les images
         public string DossierImages = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
 
-        
-        // Indique si l'on peut cliquer sur les cartes ou non
-        public bool evenement = false;
-
 
         // Déclare les classes principales
         Partie partie = new Partie();
         Manche manche = new Manche();
         Carte carteJoueur = new Carte();
 
-
+        public bool MancheTermine = false;
 
 
 
@@ -79,11 +75,20 @@ namespace MowGame.Main
             Joueur J2 = new Joueur(id: 1, pseudo: "Nathan", race: "Humain");
             Joueur J3 = new Joueur(id: 2, pseudo: "R209", race: "Robot");
 
-            // Attente condition de fin
-            while (true) // TODO ajouter condition de fin de partie
+
+            /* La partie continue tant qu'un joueur n'a pas atteint 100 de score
+             */
+            while (partie.Continue())
             {
-                Thread.Sleep(2000); // Réduit la charge cpu en ralentissant la vérification 
+                Thread.Sleep(1000); // Réduit la charge cpu en ralentissant la vérification
+
+                // Si une manche se termine
+                if (MancheTermine)
+                    // On redémarre une nouvelle manche
+                    DemarrerManche();
             }
+            // A partir d'ici, la partie est terminée
+
 
             // Stocker scores
             // Nettoyer variables
@@ -94,30 +99,43 @@ namespace MowGame.Main
 
 
         /// <summary>
-        /// Déroulement de la manche
+        /// Thread: Déroulement de la manche (continu)
         /// </summary>
-        public void MancheEnCours()
+        public void DemarrerManche()
         {
+            // Réinitialise
+            MancheTermine = false;
+
             // Recrée une manche
             manche = new Manche();
 
             // Mélange pioche
+            manche.MelangerPioche();
 
             // Distribution cartes
-
-            // Début jeu
-            // Changement de joueur à chaque fin de tour de jeu d'un joueur
-
-
-            // Attente condition de fin
-            while (true) // TODO ajouter condition de fin de manche
+            foreach (Joueur joueur in partie.Joueurs)
             {
-                Thread.Sleep(2000); // Réduit la charge cpu en ralentissant la vérification 
+                for (int i = 0; i < partie.Joueurs.Count(); i++)
+                {
+                    joueur.MainDuJoueur.Add(manche.Pioche.Pop());
+                }
             }
+
+            /* La manche continue tant que la pioche ET le troupeau ne sont pas vide.
+             * Les joueurs jouent chacun leur tour pendant ce temps ...
+             */
+            while (manche.Pioche.Count != 0 && manche.Troupeau.Count != 0)
+            {
+                Thread.Sleep(1000); // Réduit la charge cpu en ralentissant la vérification
+            }
+            // A partir d'ici, la manche est terminée
+
 
             // Compter scores,
             // vider mains, et le troupeau
             // Le joueur qui termine (en ramassant le troupeau), joue la manche suivante
+
+            MancheTermine = true;
         }
 
 
@@ -128,64 +146,12 @@ namespace MowGame.Main
 
             // Déclare les Threads (appelle une fonction à exécuter au sein du thread)
             Thread partieEnCours = new Thread(new ThreadStart(PartieEnCours));
-            Thread mancheEnCours = new Thread(new ThreadStart(MancheEnCours));
+            Thread mancheEnCours = new Thread(new ThreadStart(DemarrerManche));
 
             // Démarre les Threads
             partieEnCours.Start();
             mancheEnCours.Start();
 
-
-            #region NATHAN Déroulement du jeu
-            /**
-             * Ajoute ici le déroulement du jeu,
-             * jusqu'à la balise #endregion
-             * 
-             * - fin de partie, de manche
-             * - début de partie, de manche -> variables à instancier, constructeurs à appeler
-             * - ...
-             */
-            // TODO : Thread this shit
-            // La partie continue tant que Continue return true.
-            while (partie.Continue())
-            {
-                manche.MelangerPioche();
-                foreach (Joueur joueur in partie.Joueurs)
-                {
-                    for (int i = 0; i < partie.Joueurs.Count(); i++)
-                    {
-                        joueur.MainDuJoueur.Add(manche.Pioche.Pop());
-                    }
-                }
-
-                
-                // La manche continue tant que la piche ET le troupeau ne sont pas vide.
-                while(manche.Pioche.Count != 0 && manche.Troupeau.Count != 0)
-                {
-                    //
-                    // le joueur fait son tour
-                    partie.JoueurSuivant();
-                }
-            }
-
-
-             
-
-            // Exemple ci-dessous (vu ensemble hier)
-            //
-
-            bool cartePlacee;
-            // Exécute les tests de placement de la carte: place la carte si c'est possible
-            manche.PlacerCarte(carteJoueur, out cartePlacee);
-            
-            // si le placement de la carte échoue
-            if (!cartePlacee)
-            {
-                // j'envoie le message pour indiquer que la carte n'est pas jouable
-
-            }
-
-
-            #endregion
 
             #region Chargement des images (Exemple)
 
@@ -226,7 +192,7 @@ namespace MowGame.Main
             #endregion
 
 
-            //TODO Ajouter les conditions de fin (losque l'on quite le jeu ?)
+            //TODO Ajouter les conditions de fin (losque l'on quite le jeu ?) -> Boutton quitter
             // Termine les Threads
             partieEnCours.Abort();
             mancheEnCours.Abort();
@@ -311,41 +277,26 @@ namespace MowGame.Main
 
         public void BtnJouerCarteClick(object sender, RoutedEventArgs e) // Rends les cartes cliquable et prévient l'utilisateur  
         {
-            // Il faut choisir une carte (ici, je met en dur, mais il faut la récupérer avec le clic souris)
-            Carte carte = new Carte();
+            // TODO: Reprendre le binding pour que le sender devienne la carte
+            Carte carte = new Carte(); // pas bon
 
-            // Teste si la carte eset jouable, la place si c'est possible -> joueur suivant
-            partie.JoueurEnCours.Jouer(manche, carte);
-            MessageBox.Show(partie.JoueurEnCours.Pseudo + " a joué la carte " + carte);
+            // Exécute les tests de placement de la carte: place la carte si c'est possible
+            bool cartePlacee;
+            manche.PlacerCarte(carteJoueur, out cartePlacee);
+
+            // si le placement de la carte échoué
+            if (!cartePlacee)
+                MessageBox.Show("Impossible de jouer cette carte");
+            else
+            {
+                partie.JoueurEnCours.Piocher(manche);
+                MessageBox.Show(partie.JoueurEnCours.Pseudo + " a joué la carte " + carte);
+            }
+
 
             // Si pioche non vide -> piocher
             // Sinon teste ramasser -> fin de jeu possible
 
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void BtnPoserCarte(object sender, MouseButtonEventArgs e) // Place la carte lorsqu'elle est cliqué
-        {
-            if (evenement)
-            {
-                if (Card3.Fill == null)
-                {
-                    var uriSource = new Uri(@"C:\Users\Admin\Desktop\EPSI\C#\mow\Vaches\Vache_9.png");
-                    Card3.Fill = new ImageBrush(new BitmapImage(uriSource));
-                    Card3.DataContext = @"C:\Users\Admin\Desktop\EPSI\C#\mow\Vaches\Vache_9.png";
-                }
-                else
-                {
-                    var uriSource2 = new Uri(@"C:\Users\Admin\Desktop\EPSI\C#\mow\Vaches\Vache_4.png");
-                    Card1.Fill = new ImageBrush(new BitmapImage(uriSource2));
-                    Card1.DataContext = @"C:\Users\Admin\Desktop\EPSI\C#\mow\Vaches\Vache_9.png";
-                }
-                evenement = false;
-            }
         }
 
 
@@ -375,5 +326,11 @@ namespace MowGame.Main
             panel.Height = taille;
         }
 
+        private void SensDuJeu_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Change le sens si c'est possible
+            if (manche.PeutChangerSens)
+                partie.JoueurEnCours.ChangerSensDeJeu(manche);
+        }
     } // Fin class MainWindow : Window
 } // Fin namespace mowProject

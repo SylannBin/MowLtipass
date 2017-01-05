@@ -10,7 +10,9 @@ namespace MowLtipass.Core
     {
         /* Propriétés */
 
-        public SensDeJeu sens { get; set; } = SensDeJeu.Horaire;   
+        public SensDeJeu Sens { get; set; }
+
+        public bool PeutChangerSens { get; set; }
 
         /// <summary>
         /// Liste des cartes existantes dans le jeu
@@ -302,14 +304,23 @@ namespace MowLtipass.Core
                 {
                     Troupeau.Add(carteJoueur);
                 }
+
                 result = true;
             }
             // si ce n'est pas jouable 
             else
             {
                 result = false;
-
             }
+
+
+            // Si l'on a joué une carte avec 5 mouches
+            if (carteJoueur.TypeDeCarte != TypesDeCarte.standard)
+            {
+                PeutChangerSens = true;
+            }
+            // Sinon ...
+            PeutChangerSens = false;
         }
 
         
@@ -330,7 +341,6 @@ namespace MowLtipass.Core
         /// </summary>
         public Manche()
         {
-            SensDeJeu SensDeJeu = SensDeJeu.Horaire;
             Troupeau = new ObservableCollection<Carte>();
             Pioche = new Stack<Carte>();
             listerLesCartes();

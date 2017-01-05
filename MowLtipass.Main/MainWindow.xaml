@@ -90,10 +90,17 @@
         <!--FIN Liste des joueurs (EN HAUT) -->
 
         <!-- DEBUT Liste des Cartes du joueur en cours (EN BAS) -->
-        <StackPanel Name="panel" Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" MouseEnter="hover" MouseLeave="finhover">
+        <StackPanel Name="panel"
+                    Orientation="Horizontal"
+                    DockPanel.Dock="Bottom"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Height="125"
+                    MouseEnter="hover"
+                    MouseLeave="finhover">
 
             <Rectangle x:Name="JoueurCourantCarte1" Height="110" Width="60" Margin="20,5" Fill="FloralWhite"/>
-            <Rectangle x:Name="JoueurCourantCarte2" Height="110" Width="60" Margin="20,5" Fill="FloralWhite" MouseLeftButtonDown="BtnPoserCarte"/>
+            <Rectangle x:Name="JoueurCourantCarte2" Height="110" Width="60" Margin="20,5" Fill="FloralWhite"/>
             <Rectangle x:Name="JoueurCourantCarte3" Height="110" Width="60" Margin="20,5" Fill="FloralWhite"/>
             <Rectangle x:Name="JoueurCourantCarte4" Height="110" Width="60" Margin="20,5" Fill="FloralWhite"/>
             <Rectangle x:Name="JoueurCourantCarte5" Height="110" Width="60" Margin="20,5" Fill="FloralWhite"/>
@@ -106,13 +113,6 @@
             <Button x:Name="BtnRamasser"
                         Content="Ramasser le troupeau"
                         Click="BtnRamasserClick"
-                        Height="30"
-                        Width="140"
-                        Margin="10"/>
-
-            <Button x:Name="BtnJouerCarte"
-                        Content="Jouer une carte"
-                        Click="BtnJouerCarteClick"
                         Height="30"
                         Width="140"
                         Margin="10"/>
@@ -164,27 +164,20 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center">
 
-            <!-- DEBUT exemple de binding -->
-            <WrapPanel Margin="10" >
-                <TextBlock Text="Window Title : "/>
-                <TextBlock Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Width="150" />
-            </WrapPanel>
-            <!-- FIN exemple de binding -->
-
             <!-- DEBUT PiocheEtSens -->
-            <WrapPanel Margin="10"
+            <WrapPanel Margin="30"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
                 <Rectangle x:Name="Pioche"
                     Height="110"
                     Width="60"
                     Fill="#FF6E5F5F"
-                    Margin="5"/>
+                    Margin="35,15"/>
                 <Rectangle x:Name="SensDuJeu"
                     Height="60"
                     Width="110"
                     Fill="Aquamarine"
-                    Margin="5"/>
+                    Margin="35,15" MouseDown="SensDuJeu_MouseDown"/>
             </WrapPanel>
             <!-- FIN PiocheEtSens -->
 
@@ -199,6 +192,10 @@
                 <Rectangle x:Name="Card1" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
                 <Rectangle x:Name="Card2" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
                 <Rectangle x:Name="Card3" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
+                <Rectangle x:Name="Card4" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
+                <Rectangle x:Name="Card5" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
+                <Rectangle x:Name="Card6" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
+                <Rectangle x:Name="Card7" Height="110" Width="60" Fill="DarkOrange" Margin="5"/>
             </WrapPanel>
             <!-- FIN Troupeau -->
         </StackPanel>
