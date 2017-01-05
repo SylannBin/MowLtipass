@@ -22,7 +22,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -32,6 +31,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using MowLtipass.Core;
 
 namespace MowGame.Main
@@ -50,19 +50,90 @@ namespace MowGame.Main
         // Indique si l'on peut cliquer sur les cartes ou non
         public bool evenement = false;
 
+
+        // Déclare les classes principales
         Partie partie = new Partie();
         Manche manche = new Manche();
         Carte carteJoueur = new Carte();
-        
 
-        Joueur J1 = new Joueur(id: 0, pseudo: "Romain", race: "Humain");
-        Joueur J2 = new Joueur(id: 1, pseudo: "Nathan", race: "Humain");
-        Joueur J3 = new Joueur(id: 2, pseudo: "R209", race: "Robot");
+
+
+
+
+        /// <summary>
+        /// Déroulement de la partie
+        /// </summary>
+        public void PartieEnCours()
+        {
+            // Recrée une partie
+            partie = new Partie();
+
+            // Menu du jeu
+
+            // Inscription
+
+            // assingation des joueurs
+
+            // EX non programmatique: 
+            Joueur J1 = new Joueur(id: 0, pseudo: "Romain", race: "Humain");
+            Joueur J2 = new Joueur(id: 1, pseudo: "Nathan", race: "Humain");
+            Joueur J3 = new Joueur(id: 2, pseudo: "R209", race: "Robot");
+
+            // Attente condition de fin
+            while (true) // TODO ajouter condition de fin de partie
+            {
+                Thread.Sleep(2000); // Réduit la charge cpu en ralentissant la vérification 
+            }
+
+            // Stocker scores
+            // Nettoyer variables
+            // Terminer Manche
+            // Terminer partie
+            // Retour Menu
+        }
+
+
+        /// <summary>
+        /// Déroulement de la manche
+        /// </summary>
+        public void MancheEnCours()
+        {
+            // Recrée une manche
+            manche = new Manche();
+
+            // Mélange pioche
+
+            // Distribution cartes
+
+            // Début jeu
+            // Changement de joueur à chaque fin de tour de jeu d'un joueur
+
+
+            // Attente condition de fin
+            while (true) // TODO ajouter condition de fin de manche
+            {
+                Thread.Sleep(2000); // Réduit la charge cpu en ralentissant la vérification 
+            }
+
+            // Compter scores,
+            // vider mains, et le troupeau
+            // Le joueur qui termine (en ramassant le troupeau), joue la manche suivante
+        }
+
 
 
         public MainWindow()
         {
             InitializeComponent();
+
+            // Déclare les Threads (appelle une fonction à exécuter au sein du thread)
+            Thread partieEnCours = new Thread(new ThreadStart(PartieEnCours));
+            Thread mancheEnCours = new Thread(new ThreadStart(MancheEnCours));
+
+            // Démarre les Threads
+            partieEnCours.Start();
+            mancheEnCours.Start();
+
 
             #region NATHAN Déroulement du jeu
             /**
@@ -154,6 +225,10 @@ namespace MowGame.Main
             #endregion
 
 
+            //TODO Ajouter les conditions de fin (losque l'on quite le jeu ?)
+            // Termine les Threads
+            partieEnCours.Abort();
+            mancheEnCours.Abort();
         }
 
 
